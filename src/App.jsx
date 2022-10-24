@@ -4,7 +4,32 @@ import './App.css';
 const VALUES = [
   [
     { type: '', bgColor: '', color: '' },
-    { type: 'Normal', bgColor: '#C6C6A7', color: '#6D6D4E' },
+    {
+      type: 'Normal',
+      bgColor: '#C6C6A7',
+      color: '#6D6D4E',
+      values: [
+        '',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x0.5',
+        'x1',
+        'x0',
+        'x0.5',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+        'x1',
+      ],
+    },
     { type: 'Fighting', bgColor: '#D67873', color: '#7D1F1A' },
     { type: 'Flying', bgColor: '#C6B7F5', color: '#6D5E9C' },
     { type: 'Poison', bgColor: '#C183C1', color: '#682A68' },
@@ -549,15 +574,23 @@ const TableCell = ({
   highlightedCell,
   setHighlightedCell,
 }) => {
+  const [hover, setHover] = useState(false);
   const isHighlighted =
     highlightedCell.row === row || highlightedCell.column === columnPos;
 
   return (
     <td
-      onMouseEnter={() => setHighlightedCell({ row, column: columnPos })}
+      onMouseEnter={() => {
+        setHighlightedCell({ row, column: columnPos });
+        setHover(!hover);
+      }}
+      onMouseLeave={() => {
+        setHover(!hover);
+      }}
       style={{
-        backgroundColor: isHighlighted ? 'gray' : null,
+        backgroundColor: isHighlighted ? '#fff59d' : '#F8F8FF',
         color: isHighlighted ? 'black' : null,
+        transform: `scale(${hover ? 1.1 : 1})`,
       }}
     >
       {row === 0 || columnPos === 0 ? (
@@ -575,6 +608,7 @@ const TableCell = ({
           }}
         >
           {/* <ValueBox value={column} /> */}
+          {/* {column === 'x1' ? '-' : <img src={`/assets/values/${column}.svg`} width="80%" />} */}
           <img src={`/assets/values/${column}.svg`} width="80%" />
         </div>
       )}
