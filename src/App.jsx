@@ -574,7 +574,8 @@ const TableCell = ({
             justifyContent: 'center',
           }}
         >
-          <ValueBox value={column} />
+          {/* <ValueBox value={column} /> */}
+          <img src={`/assets/values/${column}.svg`} width="80%" />
         </div>
       )}
     </td>
